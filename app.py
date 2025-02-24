@@ -78,7 +78,7 @@ def scale_ingredient_string(ingredient_str, scalar):
     Scale the numeric quantity in the ingredient string by the given scalar.
     E.g.: "1 cup rice" + scalar=2 => "2 cup rice"
     
-    Very naive approach: we assume the first token in the string is the quantity.
+    Now removes any trailing '.0' if the result is an integer.
     """
     parts = ingredient_str.split()
     if not parts:
@@ -90,7 +90,12 @@ def scale_ingredient_string(ingredient_str, scalar):
         quantity = 1.0
 
     new_quantity = quantity * scalar
-    parts[0] = str(new_quantity)
+
+    # If new_quantity is an integer, convert it to int.
+    if new_quantity.is_integer():
+        parts[0] = str(int(new_quantity))
+    else:
+        parts[0] = str(new_quantity)
 
     return " ".join(parts)
 
