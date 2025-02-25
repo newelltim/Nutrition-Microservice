@@ -18,6 +18,10 @@ By default, the service will be available at http://localhost:3000.
 
 ---
 
+## Communication Contract
+### How to Request and Receive Data
+You can send a POST request to one of the endpoints with a JSON body. The service will then return JSON containing either a summary or scaled data.
+
 ## Endpoints
 
 ### POST /summary
@@ -40,6 +44,21 @@ Response JSON:
   }
 }
 
+### Example Call (using JS fetch)
+
+```js
+fetch("http://localhost:3000/summary", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    ingredients: ["1 cup rice", "2 eggs", "1 tbsp olive oil"],
+    scalar: 1
+  })
+})
+```
+
 ---
 
 ### POST /scale-ingredients
@@ -55,6 +74,20 @@ Response JSON:
 {
   "scaledIngredients": ["2 cup rice", "4 eggs", "2 tbsp olive oil"]
 }
+
+### Example Call (using JS fetch)
+
+
+```js
+fetch("http://localhost:3000/scale-ingredients", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    ingredients: ["1 cup rice", "2 eggs", "1 tbsp olive oil"],
+    scalar: 2
+  })
+})
+```
 
 ---
 
@@ -79,3 +112,23 @@ Response JSON:
     "fat": 40.2
   }
 }
+
+Example Call (using JS fetch)
+
+```js
+fetch("http://localhost:3000/scale-summary", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    calories: 500,
+    protein: 20.5,
+    carbs: 60.3,
+    fat: 20.1,
+    scalar: 2
+  })
+})
+```
+
+## UML Diagram
+
+<img width="815" alt="Screenshot 2025-02-24 at 8 06 13 PM" src="https://github.com/user-attachments/assets/5a9afb4b-082b-47ab-b2c2-889cd7b7dd9d" />
