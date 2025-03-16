@@ -2,8 +2,10 @@ import os
 import json
 import requests
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # ----------------------------------------------------------------------
 #  NUTRITIONIX CREDENTIALS
@@ -212,4 +214,4 @@ def scale_summary():
 # ENTRY POINT
 # ----------------------------------------------------------------------
 if __name__ == "__main__":
-    app.run(port=3000, debug=True)
+    app.run(port=3004, debug=True)
